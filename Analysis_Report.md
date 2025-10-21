@@ -15,7 +15,7 @@ This is also a typical example of Display Name Spoofing. The email attacker is u
 ### 3. Check email headers for discrepancies
 Email headers were studied on the messageheader of the Google Admin Toolbox and also on the raw file.
 
-![Google Toolbox Analysis](HeaderAnalysis.png)
+![Google Toolbox Analysis](Google_toolbox_header_analysis.png)
 
 * **Google Toolbox Result:**
     * `SPF: pass`
