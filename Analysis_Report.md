@@ -15,6 +15,8 @@ This is also a typical example of Display Name Spoofing. The email attacker is u
 ### 3. Check email headers for discrepancies
 Email headers were studied on the messageheader of the Google Admin Toolbox and also on the raw file.
 
+![Google Toolbox Analysis](Header_Analysis.png)
+
 * **Google Toolbox Result:**
     * `SPF: pass`
     * `DKIM: pass`
@@ -36,6 +38,8 @@ The email is **not** applied in a **threatening tone**. It instead employs **lur
 A clear URL mismatch was found on the suspicious link.
 * **Displayed Link Text:** `Unsubscribe Here`
 * **Actual Link (on hover):** `https://bit.ly/3OKKeaI`
+
+![Link Hover Analysis](Link_hover.png)
 
 A genuine company does not go through a public `bit.ly` shortener as an unsubscribe link. This is a popular obfuscator (user) attacker method of hiding (covering) the actual, malicious destination of the link.
 
