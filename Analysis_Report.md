@@ -2,10 +2,10 @@
 
 An analysis of a sample phishing email was outlined in this report, following the 8 steps that were presented in the task description.
 
-### 1. Obtain a sample phishing email
-The analysis of this analysis received a safe sample email (`sample-1244.eml`)
+### 1. Obtaining a sample phishing email
+The analysis of this analysis received a safe sample email (`sample-1244.eml`). Enumerated this sample from a **GitHub** Repository
 
-### 2. Examine sender's email address for spoofing
+### 2. Examining sender's email address for spoofing
 Clear sender spoofing was detected.
 * **Apparent Sender (in Body):** `De: *****Swagbucks*****` (From: \*\*\*\*\*Swagbucks\*\*\*\*\*)
 * **Actual Sender (in Header):** `From: phishing@pot <phishing@pot>`
@@ -26,15 +26,15 @@ Email headers were studied on the messageheader of the Google Admin Toolbox and 
 
 * **Raw Header Discrepancy:**  The line `X-MS-Exchange-Organization-SCL: 5` which was found to be insufficient on a manual examination of the raw header. It is the Spam Confidence Level of Microsoft, and the number 5 website clearly indicates the email as spam.
 
-### 4. Identify suspicious links or attachments
+### 4. Identifying suspicious links or attachments
 There were no malevolent attaching. Nonetheless, some very suspicious attachment was discovered at the end of the mail.
 
-### 5. Look for urgent or threatening language
+### 5. Looking for urgent or threatening language
 The email is **not** applied in a **threatening tone**. It instead employs **lure-based social engineering** to create a sense of urgency and opportunity.
 * **Examples:** "6 best ways to easily make money and earn SBs fast".
 * **Tactic:** This is aimed at reminding the user that he or she wants to make a lot of money effortlessly, hence will request one to click without considering thinking.
 
-### 6. Note any mismatched URLs
+### 6. Notes of any mismatched URLs
 A clear URL mismatch was found on the suspicious link.
 * **Displayed Link Text:** `Unsubscribe Here`
 * **Actual Link (on hover):** `https://bit.ly/3OKKeaI`
@@ -43,7 +43,7 @@ A clear URL mismatch was found on the suspicious link.
 
 A genuine company does not go through a public `bit.ly` shortener as an unsubscribe link. This is a popular obfuscator (user) attacker method of hiding (covering) the actual, malicious destination of the link.
 
-### 7. Verify presence of spelling or grammar errors
+### 7. Verifying presence of spelling or grammar errors
 The email content showed signs of low-quality automation, including a repeated sentence:
 > "Signing up for various services is second only to money producers in terms of how quickly one may earn SBs."
 
@@ -51,7 +51,7 @@ The email content showed signs of low-quality automation, including a repeated s
 
 This sentence is used twice, consecutively, which is a pointer to a copy-pasted email template that is sloppy.
 
-### 8. Summarize phishing traits found in the email
+### 8. Summarized phishing traits found in the email
 This is an email phishing/spam which utilizes a number of tricks to make it warm and fuzzy:
 
 1.  **Social Engineering:** It uses **Display Name Spoofing** (`*****Swagbucks*****`) and **lure-based content** ("easy money") to build false trust.
