@@ -43,6 +43,8 @@ A genuine company does not go through a public `bit.ly` shortener as an unsubscr
 The email content showed signs of low-quality automation, including a repeated sentence:
 > "Signing up for various services is second only to money producers in terms of how quickly one may earn SBs."
 
+![Email Body](screenshots/Email_body.png)
+
 This sentence is used twice, consecutively, which is a pointer to a copy-pasted email template that is sloppy.
 
 ### 8. Summarize phishing traits found in the email
