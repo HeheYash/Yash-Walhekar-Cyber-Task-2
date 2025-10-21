@@ -2,20 +2,26 @@
 
 # Cyber Security Internship: Task 2 - Phishing Analysis Report
 
-This repository contains the full analysis and report for Task 2 of the Elevate Labs Cyber Security Internship.
+This repository contains the submission for Task 2 of the cybersecurity internship, focusing on the analysis of a phishing email sample.
 
 ## Objective
-The task was to obtain a sample phishing email, analyze its headers and content to identify phishing characteristics, and produce a report on the findings.
+The goal of this task was to obtain a sample phishing email, analyze its headers and content to identify phishing characteristics, and produce a detailed report on the findings.
 
-## Key Findings Summary
-The email sample was definitively identified as a phishing/spam attempt. While it cleverly passed technical authentication checks (`SPF`, `DKIM`), it relied heavily on **social engineering** and **deceptive content** to lure a victim.
+## Analysis Summary
+The provided email sample (`sample-1244 (1).eml`) was identified as a deceptive spam/phishing email. While it cleverly passed all technical authentication checks (`SPF`, `DKIM`, `DMARC`), its true malicious intent was hidden in classic social engineering tactics.
 
-**Key phishing traits identified:**
-* **Display Name Spoofing:** Impersonated the "Swagbucks" brand in the "From" field.
-* **Link Obfuscation:** Hid a suspicious `bit.ly` URL shortener behind "Unsubscribe Here" text.
-* **Social Engineering:** Used "easy money" lures to encourage clicks.
+### Key Phishing Traits Identified:
+* **Display Name Spoofing:** The sender's name was forged to appear as `*****Swagbucks*****`, while the actual sender address was `phishing@pot`.
+* **Link Obfuscation:** A suspicious `bit.ly` URL shortener was hidden behind "Unsubscribe Here" text, a common tactic to redirect users to malicious sites.
+* **Deceptive Authentication:** The email "passed" `SPF/DKIM/DMARC` checks. However, these checks only validated the attacker's public email account (e.g., `hotmail.com`), not the Swagbucks brand they were impersonating.
+* **Social Engineering:** The email used "easy money" lures ("earn SBs fast") to create a sense of opportunity and rush the user into clicking.
 
-## Deliverables
-* **[Full Analysis Report (ANALYSIS_REPORT.md)](./ANALYSIS_REPORT.md)**: A detailed, step-by-step report following the task guidelines.
-* **[Evidence File (sample-1244 (1).eml)](./sample-1244%20(1).eml)**: The raw `.eml` file used for the analysis.
-* **[Screenshots Folder](./screenshots/)**: A directory containing visual evidence from the analysis.
+## Repository Contents
+* `README.md`: This file, providing an overview of the project.
+* `ANALYSIS_REPORT.md`: The detailed report outlining the step-by-step analysis.
+* `sample-1244 (1).eml`: The raw `.eml` file used as evidence for the analysis.
+* `/screenshots`: A folder containing visual evidence, including header analysis results and email body screenshots.
+
+## Tools Used
+* **Google Admin Toolbox (Messageheader):** To analyze the email headers in a human-readable format.
+* **Text Editor:** To inspect the raw `.eml` file content.
