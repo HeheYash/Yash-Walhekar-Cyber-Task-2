@@ -1,58 +1,55 @@
-# Phishing Analysis Report
+#  Analysis Report
 
-This report details the analysis of a sample phishing email as required by the internship task. The analysis follows the 8-step guide provided.
+This report details the findings from analyzing a sample phishing email, following the 8 steps provided in the task description.
 
 ### 1. Obtain a sample phishing email
-A safe phishing/spam sample in `.eml` format was obtained for analysis.
-* **File:** `sample-1244 (1).eml`
+A safe sample email (`sample-1244 (1).eml`) was obtained for this analysis.
 
 ### 2. Examine sender's email address for spoofing
-Clear spoofing was identified.
-* **Apparent Sender (in Body):** `*****Swagbucks*****`
-* **Actual Sender (in Header):** `phishing@pot <phishing@pot>`
+Clear sender spoofing was identified.
+* **Apparent Sender (in Body):** `De: *****Swagbucks*****` (From: \*\*\*\*\*Swagbucks\*\*\*\*\*)
+* **Actual Sender (in Header):** `From: phishing@pot <phishing@pot>`
 
-This is **Display Name Spoofing**, a social engineering tactic to make the email appear to be from a trusted brand.
+This is a classic case of **Display Name Spoofing**. The attacker is relying on the email client to only show the "friendly" name, tricking the user into believing it's from the legitimate brand.
 
 ### 3. Check email headers for discrepancies
-The headers were analyzed using the **Google Admin Toolbox - Messageheader**.
+The email headers were analyzed using the **Google Admin Toolbox (Messageheader)** and by inspecting the raw file.
 
-![Google Toolbox Analysis](screenshots/1_google_toolbox.png)
+* **Google Toolbox Result:**
+    * `SPF: pass`
+    * `DKIM: pass`
+    * `DMARC: pass`
 
-At first glance, the headers appear legitimate:
-* **SPF:** `pass`
-* **DKIM:** `pass`
-* **DMARC:** `pass`
+* **Analysis:** This is a **deceptive finding** and a key discrepancy. These checks passed because the email was sent from a *technically valid* public email account (e.g., Hotmail, as seen in the server hops). These checks validate the *attacker's* sending domain, **not** the `Swagbucks.com` domain they are impersonating.
 
-However, this is a **deceptive finding**. These checks are passing for the *sender's actual domain* (a public email provider like `hotmail.com`), not the `swagbucks.com` domain. The attacker is using a legitimate, high-reputation email service to bypass simple filters, which is a key discrepancy.
-
-A manual check of the raw header also revealed a high **Spam Confidence Level (SCL)** set by Microsoft's servers (`X-MS-Exchange-Organization-SCL: 5`), which flags the email as "Spam".
+* **Raw Header Discrepancy:** A manual inspection of the raw header revealed the line: `X-MS-Exchange-Organization-SCL: 5`. This is Microsoft's Spam Confidence Level, where "5" explicitly flags the email as "Spam".
 
 ### 4. Identify suspicious links or attachments
-* **Attachments:** No malicious attachments were found.
-* **Suspicious Links:** A highly suspicious "Unsubscribe" link was identified at the bottom of the email.
+No malicious attachments were present. However, a highly suspicious link was identified at the bottom of the email.
 
 ### 5. Look for urgent or threatening language
-The email does not use traditional "threatening" language (e.g., "your account will be suspended"). Instead, it uses a **lure-based social engineering** tactic, creating a sense of urgency to get "easy money."
+The email does not use "threatening" language. Instead, it uses **lure-based social engineering** to create a sense of urgency and opportunity.
 * **Examples:** "The 6 Best Ways To Easily Make Money" and "earn SBs fast".
+* **Tactic:** This is designed to lower the user's guard by appealing to a desire for easy money, prompting them to click without thinking.
 
 ### 6. Note any mismatched URLs
-A URL mismatch was confirmed on the suspicious link.
+A clear URL mismatch was found on the suspicious link.
 * **Displayed Link Text:** `Unsubscribe Here`
-* **Actual URL (on hover):** `https://bit.ly/3OKKeaI`
+* **Actual Link (on hover):** `https://bit.ly/3OKKeaI`
 
-![Link Hover Analysis](screenshots/3_link_hover.png)
-
-This is a major red flag. Legitimate companies do not use public `bit.ly` shorteners for their official unsubscribe links. This link is obfuscated to hide its true, malicious destination.
+Legitimate companies *never* use a public `bit.ly` shortener for their unsubscribe link. This is a common attacker technique to **obfuscate** (hide) the true, malicious destination of the link.
 
 ### 7. Verify presence of spelling or grammar errors
-The email body contains indicators of low-quality, automated content, such as a duplicated sentence:
-* *"Signing up for various services is second only to money producers in terms of how quickly one may earn SBs."* (This sentence appears twice, nearly back-to-back).
+The email content showed signs of low-quality automation, including a repeated sentence:
+> "Signing up for various services is second only to money producers in terms of how quickly one may earn SBs."
 
-![Email Body](screenshots/2_email_body.png)
+This sentence appears twice, one after the other, indicating a sloppy, copy-pasted email template.
 
 ### 8. Summarize phishing traits found in the email
-This email is a clear phishing/spam attempt that combines multiple tactics:
-1.  **Brand Impersonation:** Uses "Swagbucks" in the display name to gain false trust.
-2.  **Authentication Bypass:** Sent from a legitimate public mail provider to pass `SPF/DKIM/DMARC` checks.
-3.  **Link Obfuscation:** Hides a malicious destination behind a `bit.ly` shortener.
-4.  **Social Engineering:** Uses "easy money" lures to encourage the user to click.
+This email is a phishing/spam attempt that combines several tactics to appear legitimate:
+
+1.  **Social Engineering:** It uses **Display Name Spoofing** (`*****Swagbucks*****`) and **lure-based content** ("easy money") to build false trust.
+2.  **Technical Deception:** It bypasses basic security filters by being sent from a valid public email account, resulting in misleading `SPF/DKIM/DMARC: pass` results.
+3.  **Link Obfuscation:** It hides its malicious payload behind a `bit.ly` URL shortener, disguised as a harmless "Unsubscribe" link.
+
+The email was ultimately (and correctly) flagged as spam by mail servers (SCL: 5), but it relies on fooling a human user who might trust the deceptive "pass" on authentication or the spoofed sender name.
